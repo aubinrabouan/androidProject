@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,7 +21,7 @@ public class ContextManagementActivity extends AppCompatActivity {
 
         ((Button) findViewById(R.id.buttonCheck)).setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                String light = findViewById(R.id.editText1).toString();
+                String light = ((EditText) findViewById(R.id.editText1)).getText().toString();
                 RoomContextHttpManager.retrieveLightContextState(light);
             }
         });
@@ -28,13 +29,13 @@ public class ContextManagementActivity extends AppCompatActivity {
 
         ((Button) findViewById(R.id.buttonSwitchLight)).setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                String light = findViewById(R.id.editText1).toString();
+                String light = ((EditText) findViewById(R.id.editText1)).getText().toString();
                 RoomContextHttpManager.switchLight(light);
             }
         });
         ((Button) findViewById(R.id.buttonDeleteLight)).setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                String light = findViewById(R.id.editText1).toString();
+                String light = ((EditText) findViewById(R.id.editText1)).getText().toString();;
                 RoomContextHttpManager.deleteLight(light);
             }
         });
