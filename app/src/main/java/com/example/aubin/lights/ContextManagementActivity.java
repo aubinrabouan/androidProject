@@ -1,5 +1,6 @@
 package com.example.aubin.lights;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -8,9 +9,15 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.Locale;
+
+import top.defaults.colorpicker.ColorPickerView;
+
 public class ContextManagementActivity extends AppCompatActivity {
 
     private String room;
+
+    @BindView(R.id.colorPicker)  ColorPickerView colorPickerView;
 
     RoomContextHttpManager RoomContextHttpManager = new RoomContextHttpManager(this);
 
@@ -18,6 +25,7 @@ public class ContextManagementActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_context_management);
+
 
         ((Button) findViewById(R.id.buttonCheck)).setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -39,6 +47,9 @@ public class ContextManagementActivity extends AppCompatActivity {
                 RoomContextHttpManager.deleteLight(light);
             }
         });
+
+
+
 
     }
 
@@ -74,5 +85,12 @@ public class ContextManagementActivity extends AppCompatActivity {
 
 
 
+    private String colorHex(int color) {
+        int a = Color.alpha(color);
+        int r = Color.red(color);
+        int g = Color.green(color);
+        int b = Color.blue(color);
+        return String.format(Locale.getDefault(), "0x%02X%02X%02X%02X", a, r, g, b);
+    }
 
 }
