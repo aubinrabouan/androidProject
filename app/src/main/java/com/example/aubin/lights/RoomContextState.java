@@ -2,32 +2,32 @@ package com.example.aubin.lights;
 
 public class RoomContextState {
 
-    private String room;
+    private int id;
     private String status;
-    private int light;
-    private float noise;
+    private int level;
+    private float roomId;
 
-    public RoomContextState(String room, String status, int light, float noise) {
+    public RoomContextState(int id, String status, int level, float roomId) {
         super();
-        this.room = room;
+        this.id = id;
         this.status = status;
-        this.light = light;
-        this.noise = noise;
+        this.level = level;
+        this.roomId = roomId;
     }
 
-    public String getRoom() {
-        return this.room;
+    public int getId() {
+        return this.id;
     }
 
     public String getStatus() {
         return this.status;
     }
 
-    public int getLight() {
-        return this.light;
+    public int getLevel() {
+        return this.level;
     }
 
-    public float getNoise() {
-        return this.noise;
+    public float getRoomId() {
+        return this.roomId;
     }
 }
