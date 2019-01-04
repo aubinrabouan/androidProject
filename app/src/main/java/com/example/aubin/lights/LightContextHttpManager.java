@@ -11,17 +11,18 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class RoomContextHttpManager  {
+public class LightContextHttpManager {
     private ContextManagementActivity ContextManagementActivity;
+    private String baseurl = "https://faircorp-app-deguise.cleverapps.io/api/lights/";
 
-    public RoomContextHttpManager(ContextManagementActivity ContextManagementActivity) {
+    public LightContextHttpManager(ContextManagementActivity ContextManagementActivity) {
         this.ContextManagementActivity = ContextManagementActivity;
     }
 
 
     public void retrieveLightContextState(final String light) {
 
-        String url = "https://faircorp-aubin-rabouan.cleverapps.io/api/lights/" + light;
+        String url = baseurl + light;
 
         RequestQueue queue = Volley.newRequestQueue(ContextManagementActivity);
 
@@ -33,11 +34,13 @@ public class RoomContextHttpManager  {
                         try {
                             int id = Integer.parseInt(response.get("id").toString());
                             String status = response.get("status").toString();
-                            int level = Integer.parseInt(response.get("level").toString());
+                            int level = Integer.parseInt(response.get("saturation").toString());
                             int roomId = Integer.parseInt(response.get("roomId").toString());
+                            int color = Integer.parseInt(response.get("color").toString().substring(1),16);
 
-                            ContextManagementActivity.onUpdateLight(new RoomContextState(id, status, level, roomId));
 
+                            ContextManagementActivity.onUpdateLight(new LightContextState(id, status, level, roomId));
+                            ContextManagementActivity.testcolor(color);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -56,7 +59,7 @@ public class RoomContextHttpManager  {
 
     public void switchLight(final String light) {
 
-        String url = "https://faircorp-aubin-rabouan.cleverapps.io/api/lights/" + light + "/switch";
+        String url = baseurl + light + "/switch";
 
         RequestQueue queue = Volley.newRequestQueue(ContextManagementActivity);
 
@@ -68,11 +71,11 @@ public class RoomContextHttpManager  {
                         try {
                             int id = Integer.parseInt(response.get("id").toString());
                             String status = response.get("status").toString();
-                            int level = Integer.parseInt(response.get("level").toString());
+                            int level = Integer.parseInt(response.get("saturation").toString());
                             int roomId = Integer.parseInt(response.get("roomId").toString());
 
 
-                            ContextManagementActivity.onUpdateLight(new RoomContextState(id, status, level, roomId));
+                            ContextManagementActivity.onUpdateLight(new LightContextState(id, status, level, roomId));
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -90,7 +93,7 @@ public class RoomContextHttpManager  {
     }
     public void deleteLight(final String light) {
 
-        String url = "https://faircorp-aubin-rabouan.cleverapps.io/api/lights/" + light;
+        String url = baseurl + light;
 
         RequestQueue queue = Volley.newRequestQueue(ContextManagementActivity);
 

@@ -17,9 +17,8 @@ public class ContextManagementActivity extends AppCompatActivity {
 
     private String room;
 
-
-
-    RoomContextHttpManager RoomContextHttpManager = new RoomContextHttpManager(this);
+    //handles all the http request
+    LightContextHttpManager RoomContextHttpManager = new LightContextHttpManager(this);
 
 
     @Override
@@ -28,7 +27,7 @@ public class ContextManagementActivity extends AppCompatActivity {
         setContentView(R.layout.activity_context_management);
 
 
-
+        //BUTTON to retreive the state of a specific light
         ((Button) findViewById(R.id.buttonCheck)).setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 String light = ((EditText) findViewById(R.id.editText1)).getText().toString();
@@ -36,13 +35,15 @@ public class ContextManagementActivity extends AppCompatActivity {
             }
         });
 
-
+        //Button to switch the selected light
         ((Button) findViewById(R.id.buttonSwitchLight)).setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 String light = ((EditText) findViewById(R.id.editText1)).getText().toString();
                 RoomContextHttpManager.switchLight(light);
             }
         });
+
+        //button to delete the selected light
         ((Button) findViewById(R.id.buttonDeleteLight)).setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 String light = ((EditText) findViewById(R.id.editText1)).getText().toString();;
@@ -50,8 +51,9 @@ public class ContextManagementActivity extends AppCompatActivity {
             }
         });
 
+        //listener when we change the value of the colorbar
         ColorSeekBar colorSeekBar = (ColorSeekBar) findViewById(R.id.color_seek_bar);
-        colorSeekBar.getColor();
+        //colorSeekBar.getColor();
         colorSeekBar.setOnColorChangeListener(new ColorSeekBar.OnColorChangeListener() {
             @Override
             public void onColorChangeListener(int i) {
@@ -80,7 +82,7 @@ public class ContextManagementActivity extends AppCompatActivity {
     }
 
 
-    public void onUpdateLight(RoomContextState context) {
+    public void onUpdateLight(LightContextState context) {
 
         ((TextView) findViewById(R.id.textViewLightValue)).setText(String.valueOf(context.getLevel()));
         ((TextView) findViewById(R.id.textViewNoiseValue)).setText(String.valueOf(context.getRoomId()));
@@ -91,6 +93,15 @@ public class ContextManagementActivity extends AppCompatActivity {
             ((ImageView) findViewById(R.id.imageView1)).setImageResource(R.drawable.ic_bulb_off);
         }
 
+    }
+
+
+    //transforming the hex value to somthing understandable for the color picker
+    public void testcolor(int color) {
+        String col = Integer.toHexString(color);
+        col =  col + "00";
+        color=Integer.parseInt(col,16);
+        ((TextView) findViewById(R.id.colorviewer)).setBackgroundColor(-color);
     }
 
 
