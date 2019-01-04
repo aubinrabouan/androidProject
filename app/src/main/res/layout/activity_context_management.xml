@@ -183,12 +183,18 @@
             </LinearLayout>
 
             <TableRow
-                android:layout_width="310dp"
-                android:layout_height="70dp"
-                android:layout_below="@+id/tableLayout1"
+                android:layout_width="247dp"
+                android:layout_height="43dp"
+
+                android:layout_above="@+id/linearLayoutButtons"
+                android:layout_below="@+id/imageView1"
+
+
                 android:layout_marginStart="32dp"
-                android:layout_marginTop="6dp"
-                android:layout_marginEnd="32dp" >
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="15dp" >
+
 
                 <TextView
                     android:id="@+id/colorviewer"
