@@ -1,7 +1,10 @@
 package com.example.aubin.lights;
 
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -11,21 +14,38 @@ import android.widget.TextView;
 
 import java.util.Locale;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import top.defaults.colorpicker.ColorPickerView;
 
 public class ContextManagementActivity extends AppCompatActivity {
 
     private String room;
 
-    @BindView(R.id.colorPicker)  ColorPickerView colorPickerView;
+    @BindView(R.id.colorPicker) ColorPickerView colorPickerView;
+    @BindView(R.id.colorHex) TextView colorHex;
+
 
     RoomContextHttpManager RoomContextHttpManager = new RoomContextHttpManager(this);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_context_management);
+        ButterKnife.bind(this);
 
+        colorPickerView.subscribe((color, fromUser) -> {
+            colorHex.setText(colorHex(color));
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                getWindow().setStatusBarColor(color);
+            }
+            ActionBar actionBar = getSupportActionBar();
+            if (actionBar != null) {
+                actionBar.setBackgroundDrawable(new ColorDrawable(color));
+            }
+        });
 
         ((Button) findViewById(R.id.buttonCheck)).setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -47,7 +67,6 @@ public class ContextManagementActivity extends AppCompatActivity {
                 RoomContextHttpManager.deleteLight(light);
             }
         });
-
 
 
 
