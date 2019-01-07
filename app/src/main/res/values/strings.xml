@@ -7,4 +7,8 @@
     <string name="image_content_description">image_content_description</string>
     <string name="lightonoff">lightonoff</string>
     <string name="ringonoff">ringonoff</string>
+    <string name="DeleteLight">Delete Light</string>
+    <string name="RoomID">Room ID</string>
+    <string name="EnterLightId">Enter Light ID</string>
+    <string name="Refresh">Refresh</string>
 </resources>
