@@ -31,18 +31,7 @@ public class LightContextHttpManager {
 
                     @Override
                     public void onResponse(JSONObject response) {
-                        try {
-                            int id = Integer.parseInt(response.get("id").toString());
-                            String status = response.get("status").toString();
-                            int level = Integer.parseInt(response.get("saturation").toString());
-                            int roomId = Integer.parseInt(response.get("roomId").toString());
-                            int color = Integer.parseInt(response.get("color").toString().substring(1),16);
-
-
-                            ContextManagementActivity.onUpdateLight(new LightContextState(id, status, level, roomId));
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+                        LightContextHttpManager.this.onResponse(response);
 
                     }
                 }, new Response.ErrorListener() {
@@ -67,18 +56,7 @@ public class LightContextHttpManager {
 
                     @Override
                     public void onResponse(JSONObject response) {
-                        try {
-                            int id = Integer.parseInt(response.get("id").toString());
-                            String status = response.get("status").toString();
-                            int level = Integer.parseInt(response.get("saturation").toString());
-                            int roomId = Integer.parseInt(response.get("roomId").toString());
-                            int color = Integer.parseInt(response.get("color").toString().substring(1),16);
-
-
-                            ContextManagementActivity.onUpdateLight(new LightContextState(id, status, level, roomId));
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+                        LightContextHttpManager.this.onResponse(response);
 
                     }
                 }, new Response.ErrorListener() {
