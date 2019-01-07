@@ -31,7 +31,19 @@ public class LightContextHttpManager {
 
                     @Override
                     public void onResponse(JSONObject response) {
-                        LightContextHttpManager.this.onResponse(response);
+                        try {
+                            int id = Integer.parseInt(response.get("id").toString());
+                            String status = response.get("status").toString();
+                            int level = Integer.parseInt(response.get("saturation").toString());
+                            int roomId = Integer.parseInt(response.get("roomId").toString());
+                            int color = Integer.parseInt(response.get("color").toString().substring(1),16);
+
+
+                            ContextManagementActivity.onUpdateLight(new LightContextState(id, status, level, roomId));
+                            ContextManagementActivity.testcolor(color);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
 
                     }
                 }, new Response.ErrorListener() {
@@ -56,7 +68,17 @@ public class LightContextHttpManager {
 
                     @Override
                     public void onResponse(JSONObject response) {
-                        LightContextHttpManager.this.onResponse(response);
+                        try {
+                            int id = Integer.parseInt(response.get("id").toString());
+                            String status = response.get("status").toString();
+                            int level = Integer.parseInt(response.get("saturation").toString());
+                            int roomId = Integer.parseInt(response.get("roomId").toString());
+
+
+                            ContextManagementActivity.onUpdateLight(new LightContextState(id, status, level, roomId));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
 
                     }
                 }, new Response.ErrorListener() {
@@ -69,53 +91,6 @@ public class LightContextHttpManager {
         queue.add(contextRequest);
 
     }
-
-    public void changecolor(final String light, final String colour) {
-
-        String url = baseurl + light + "/color";
-
-        RequestQueue queue = Volley.newRequestQueue(ContextManagementActivity);
-        JSONObject colorjson = new JSONObject() ;
-        try {
-            colorjson.put("color",colour);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        final JsonObjectRequest contextRequest = new JsonObjectRequest
-                (Request.Method.PUT, url, colorjson, new Response.Listener<JSONObject>() {
-
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        LightContextHttpManager.this.onResponse(response);
-
-                    }
-                }, new Response.ErrorListener() {
-
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-
-                    }
-                });
-        queue.add(contextRequest);
-
-    }
-
-    private void onResponse(JSONObject response) {
-        try {
-            int id = Integer.parseInt(response.get("id").toString());
-            String status = response.get("status").toString();
-            int level = Integer.parseInt(response.get("saturation").toString());
-            int roomId = Integer.parseInt(response.get("roomId").toString());
-            int color = Integer.parseInt(response.get("color").toString().substring(1),16);
-
-
-            ContextManagementActivity.onUpdateLight(new LightContextState(id, status, level, roomId, color));
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }
-
-
     public void deleteLight(final String light) {
 
         String url = baseurl + light;
@@ -140,8 +115,6 @@ public class LightContextHttpManager {
         queue.add(contextRequest);
 
     }
-
-
 
 
 

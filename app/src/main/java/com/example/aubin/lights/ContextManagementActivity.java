@@ -16,7 +16,6 @@ import androidx.appcompat.app.AppCompatActivity;
 public class ContextManagementActivity extends AppCompatActivity {
 
     private String room;
-    private Integer color;
 
     //handles all the http request
     LightContextHttpManager RoomContextHttpManager = new LightContextHttpManager(this);
@@ -47,7 +46,7 @@ public class ContextManagementActivity extends AppCompatActivity {
         //button to delete the selected light
         ((Button) findViewById(R.id.buttonDeleteLight)).setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                String light = ((EditText) findViewById(R.id.editText1)).getText().toString();
+                String light = ((EditText) findViewById(R.id.editText1)).getText().toString();;
                 RoomContextHttpManager.deleteLight(light);
             }
         });
@@ -58,11 +57,8 @@ public class ContextManagementActivity extends AppCompatActivity {
         colorSeekBar.setOnColorChangeListener(new ColorSeekBar.OnColorChangeListener() {
             @Override
             public void onColorChangeListener(int i) {
-                color = i;
-                //String light = ((EditText) findViewById(R.id.editText1)).getText().toString();
-                //((TextView) findViewById(R.id.textViewLightValue)).setText(Integer.toHexString(i));
+                ((TextView) findViewById(R.id.textViewLightValue)).setText(Integer.toHexString(i));
                 ((TextView) findViewById(R.id.colorviewer)).setBackgroundColor(i);
-                //RoomContextHttpManager.changecolor(light , "#" + Integer.toHexString(i));
             }
 
         });
@@ -90,7 +86,7 @@ public class ContextManagementActivity extends AppCompatActivity {
 
         ((TextView) findViewById(R.id.textViewLightValue)).setText(String.valueOf(context.getLevel()));
         ((TextView) findViewById(R.id.textViewNoiseValue)).setText(String.valueOf(context.getRoomId()));
-        testcolor(context.getColor());
+
         if (context.getStatus().equals("ON")) {
             ((ImageView) findViewById(R.id.imageView1)).setImageResource(R.drawable.ic_bulb_on);
         } else {
@@ -102,15 +98,15 @@ public class ContextManagementActivity extends AppCompatActivity {
 
     //transforming the hex value to somthing understandable for the color picker
     public void testcolor(int color) {
-        //String col = Integer.toHexString(-color);
-        //color=Integer.parseInt(col,16);
+        String col = Integer.toHexString(color);
+        col =  col + "00";
+        color=Integer.parseInt(col,16);
         ((TextView) findViewById(R.id.colorviewer)).setBackgroundColor(-color);
     }
 
 
 
 /*
-
     private String colorHex(int color) {
         int a = Color.alpha(color);
         int r = Color.red(color);
