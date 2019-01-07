@@ -26,17 +26,16 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="@string/enter_room"
-                android:textAlignment="center" />
+                    android:id="@+id/textView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/enter_light"
+                    android:textAlignment="center"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
                 android:orientation="horizontal">
 
                 <EditText
@@ -99,11 +98,11 @@
                         android:textSize="24sp" />
 
                     <TextView
-                        android:id="@+id/textViewLightValue"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/red"
-                        android:textSize="24sp" />
+                            android:id="@+id/textViewLightValue"
+                            android:layout_width="137dp"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/red"
+                            android:textSize="24sp" android:visibility="visible"/>
                 </TableRow>
 
                 <TableRow
@@ -113,13 +112,13 @@
                     android:padding="5dip">
 
                     <TextView
-                        android:id="@+id/textViewNoise"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="right"
-                        android:text="@string/noise"
-                        android:textAlignment="gravity"
-                        android:textSize="24sp" />
+                            android:id="@+id/textViewNoise"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right"
+                            android:text="Room"
+                            android:textAlignment="gravity"
+                            android:textSize="24sp"/>
 
                     <TextView
                         android:id="@+id/textViewNoiseValue"
@@ -171,15 +170,15 @@
                     tools:ignore="OnClick" />
 
                 <Button
-                    android:id="@+id/buttonDeleteLight"
-                    style="?android:attr/buttonStyleSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical|center_horizontal"
-                    android:layout_marginRight="14dp"
-                    android:onClick="switchRinger"
-                    android:text="@string/ringonoff"
-                    tools:ignore="OnClick" />
+                        android:id="@+id/buttonDeleteLight"
+                        style="?android:attr/buttonStyleSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical|center_horizontal"
+                        android:layout_marginRight="14dp"
+                        android:onClick="switchRinger"
+                        android:text="DeleteLight"
+                        tools:ignore="OnClick"/>
             </LinearLayout>
 
             <TableRow

@@ -40,7 +40,7 @@ public class LightContextHttpManager {
 
 
                             ContextManagementActivity.onUpdateLight(new LightContextState(id, status, level, roomId));
-                            ContextManagementActivity.testcolor(color);
+                            //ContextManagementActivity.testcolor(color);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
