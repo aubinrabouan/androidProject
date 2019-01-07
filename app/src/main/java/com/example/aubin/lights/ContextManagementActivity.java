@@ -16,7 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class ContextManagementActivity extends AppCompatActivity {
 
     private String room;
-    private Integer color;
+    //private Integer color;
 
     //handles all the http request
     LightContextHttpManager RoomContextHttpManager = new LightContextHttpManager(this);
@@ -55,12 +55,11 @@ public class ContextManagementActivity extends AppCompatActivity {
         //listener when we change the value of the colorbar
         ColorSeekBar colorSeekBar = (ColorSeekBar) findViewById(R.id.color_seek_bar);
         //colorSeekBar.getColor();
+        //color = colorSeekBar.getColor();
         colorSeekBar.setOnColorChangeListener(new ColorSeekBar.OnColorChangeListener() {
             @Override
             public void onColorChangeListener(int i) {
-                color = i;
-                //String light = ((EditText) findViewById(R.id.editText1)).getText().toString();
-                //((TextView) findViewById(R.id.textViewLightValue)).setText(Integer.toHexString(i));
+                //diff += 1;
                 ((TextView) findViewById(R.id.colorviewer)).setBackgroundColor(i);
                 //RoomContextHttpManager.changecolor(light , "#" + Integer.toHexString(i));
             }
@@ -90,7 +89,7 @@ public class ContextManagementActivity extends AppCompatActivity {
 
         ((TextView) findViewById(R.id.textViewLightValue)).setText(String.valueOf(context.getLevel()));
         ((TextView) findViewById(R.id.textViewNoiseValue)).setText(String.valueOf(context.getRoomId()));
-        testcolor(context.getColor());
+        //testcolor(context.getColor());
         if (context.getStatus().equals("ON")) {
             ((ImageView) findViewById(R.id.imageView1)).setImageResource(R.drawable.ic_bulb_on);
         } else {
