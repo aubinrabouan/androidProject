@@ -58,13 +58,13 @@ public class ContextManagementActivity extends AppCompatActivity {
             @Override
             public void onColorChangeListener(int i) {
                 try {
-                    TimeUnit.MILLISECONDS.sleep(300);
+                    TimeUnit.MILLISECONDS.sleep(500);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
 
                 String light = ((EditText) findViewById(R.id.editText1)).getText().toString();
-                String color = Integer.toHexString(i).substring(2);
+                String color = Integer.toHexString(colorSeekBar.getColor()).substring(2);
                 RoomContextHttpManager.Changecolor(light, color);
                 //((TextView) findViewById(R.id.textViewLightValue)).setText(String.valueOf(colorSeekBar.getColor()));
                 ((TextView) findViewById(R.id.colorviewer)).setBackgroundColor(colorSeekBar.getColor());
