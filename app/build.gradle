@@ -31,8 +31,9 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation 'com.android.volley:volley:1.1.0'
-    compile 'com.divyanshu.colorseekbar:colorseekbar:1.0.2'
+    implementation 'com.divyanshu.colorseekbar:colorseekbar:1.0.2'
+    //implementation 'android.support.v7.app.WindowDecorActionBar'
 
-    implementation 'com.google.android.material:material:1.0.0-beta01'
+    //implementation 'com.google.android.material:material:1.0.0-beta01'
 
 }

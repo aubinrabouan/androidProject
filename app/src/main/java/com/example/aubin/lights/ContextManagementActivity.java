@@ -6,10 +6,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-
+import androidx.appcompat.app.AppCompatActivity;
 import com.divyanshu.colorseekbar.ColorSeekBar;
 
-import androidx.appcompat.app.AppCompatActivity;
+import java.util.concurrent.TimeUnit;
 
 //import android.support.v7.app.AppCompatActivity;
 
@@ -46,7 +46,7 @@ public class ContextManagementActivity extends AppCompatActivity {
         //button to delete the selected light
         ((Button) findViewById(R.id.buttonDeleteLight)).setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                String light = ((EditText) findViewById(R.id.editText1)).getText().toString();;
+                String light = ((EditText) findViewById(R.id.editText1)).getText().toString();
                 RoomContextHttpManager.deleteLight(light);
             }
         });
@@ -57,8 +57,17 @@ public class ContextManagementActivity extends AppCompatActivity {
         colorSeekBar.setOnColorChangeListener(new ColorSeekBar.OnColorChangeListener() {
             @Override
             public void onColorChangeListener(int i) {
-                ((TextView) findViewById(R.id.textViewLightValue)).setText(Integer.toHexString(i));
-                ((TextView) findViewById(R.id.colorviewer)).setBackgroundColor(i);
+                try {
+                    TimeUnit.MILLISECONDS.sleep(500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                String light = ((EditText) findViewById(R.id.editText1)).getText().toString();
+                String color = Integer.toHexString(colorSeekBar.getColor()).substring(2);
+                RoomContextHttpManager.Changecolor(light, color);
+                //((TextView) findViewById(R.id.textViewLightValue)).setText(String.valueOf(colorSeekBar.getColor()));
+                ((TextView) findViewById(R.id.colorviewer)).setBackgroundColor(colorSeekBar.getColor());
             }
 
         });
@@ -85,7 +94,11 @@ public class ContextManagementActivity extends AppCompatActivity {
     public void onUpdateLight(LightContextState context) {
 
         ((TextView) findViewById(R.id.textViewLightValue)).setText(String.valueOf(context.getLevel()));
+
         ((TextView) findViewById(R.id.textViewNoiseValue)).setText(String.valueOf(context.getRoomId()));
+
+
+
 
         if (context.getStatus().equals("ON")) {
             ((ImageView) findViewById(R.id.imageView1)).setImageResource(R.drawable.ic_bulb_on);
@@ -96,12 +109,13 @@ public class ContextManagementActivity extends AppCompatActivity {
     }
 
 
-    //transforming the hex value to somthing understandable for the color picker
-    public void testcolor(int color) {
-        String col = Integer.toHexString(color);
-        col =  col + "00";
-        color=Integer.parseInt(col,16);
-        ((TextView) findViewById(R.id.colorviewer)).setBackgroundColor(-color);
+    //transforming the hex value to something understandable for the color picker
+    public void testcolor(String color) {
+        String bip = color;
+        int col = Integer.parseInt(("f88fff"),16);
+        findViewById(R.id.colorviewer).setBackgroundColor(-col);
+        ((TextView) findViewById(R.id.textViewNoiseValue)).setText(bip);
+
     }
 
 
